@@ -4,4 +4,5 @@
 
 - Maria Clara Motta
 - Lina Furukawa
-- Enzo 
+- Enzo Bacigalupo
+
