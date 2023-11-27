@@ -1,0 +1,31 @@
+import pygame 
+
+from pygame.locals import * 
+
+from sys import exit 
+
+from janela import *
+from init_tela import * 
+
+def over_tela(window): 
+    clock = pygame.time.Clock()
+
+    # imagens para colocar 
+
+
+    roda = True 
+    while roda: 
+        clock.tick(FPS)     # frames por segundo 
+
+        for event in pygame.event.gt(): 
+            if event.type == pygame.QUIT:
+                state = QUIT 
+                roda = False
+            if event.type == pygame.KEYDOWN:
+                state = GAME 
+                roda = False 
+
+    window.blit()      # colocar imagem 
+    pygame.display.update()
+
+    return state
