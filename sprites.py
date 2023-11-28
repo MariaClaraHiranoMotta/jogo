@@ -48,7 +48,7 @@ class obstaculo(pygame.sprite.Sprite):
 
 
 class comida(pygame.sprite.Sprite): 
-    def __init__(self): 
+    def __init__(self, posicao_obstaculo): 
          # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
@@ -57,6 +57,8 @@ class comida(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.y = -50
         self.rect.x = random.randint(50,largura - 50)
+        while self.rect.x in range(posicao_obstaculo-10, posicao_obstaculo+10): # garante que a bomba e o hamburguer não estejam no mesmo espaço
+            self.rect.x = random.randint(50,largura - 50)
         self.speedy = 4
 
     def update(self): 
