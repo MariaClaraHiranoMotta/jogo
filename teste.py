@@ -14,6 +14,8 @@ pygame.display.set_caption('Pac burguer') # titulo do jogo
 font = pygame.font.SysFont(None, 48)
 background = pygame.image.load('fundo_tela.jpg').convert()   # tela de fundo 
 background_rect = background.get_rect()
+life = pygame.image.load('vida_coraçao.png').convert()
+life_rect = life.get_rect()
 
 # Carrega os sons do jogo
 pygame.mixer.music.load('joker-boy-109889.mp3')
@@ -28,7 +30,9 @@ all_comida = pygame.sprite.Group()
 player = jogador()
 all_sprites.add(player)
 
-clock = pygame.time.Clock()    
+# Variável para o ajuste de velocidade
+clock = pygame.time.Clock()  
+
 
 ref = pygame.time.get_ticks()
 game = True 
@@ -38,6 +42,7 @@ pygame.mixer.music.play(loops=-1)  # começa a tocar o som de fundo em loop;
 
 
 score = 0
+vida = 3
 
 while game:      # loop principal 
     clock.tick(FPS)   # Quanto mais frames, mais rápido o objeto vai se mexer 
@@ -71,17 +76,28 @@ while game:      # loop principal
         all_comida.add(objeto_comida)
         ref = now
     
-    hits = pygame.sprite.spritecollide(player, all_obstaculo, True)
-    if len(hits) > 0:
+    colisao = pygame.sprite.spritecollide(player, all_obstaculo, True)
+    if len(colisao) > 0:
         # Toca o som de explosão 
         explosion_sound.play()
-        player.kill()
-        game = False
+        vida -= 1
+        if vida == 0:
+            game = False
+
+    pontuar = pygame.sprite.spritecollide(player, all_comida, True)
+    if len(pontuar) > 0:
+        score += 100
 
         # Desenhando o score
     text_surface = pygame.font.Font(None,40).render(f'{score}', True, (0, 0, 0))
     text_rect = text_surface.get_rect()
     text_rect.midtop = (largura / 2,  10)
+
+        # Desenhando as vidas 
+    text_surface = pygame.font.Font(None,40).render(chr(9829) * vida, True, (255, 0, 0))
+    text_rect = text_surface.get_rect()
+    text_rect.bottomleft = (10, altura - 10)
+    window.blit(text_surface, text_rect)
 
 
     # Atualiza o jogo
