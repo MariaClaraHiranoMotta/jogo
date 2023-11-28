@@ -18,10 +18,12 @@ background_rect = background.get_rect()
 # Carrega os sons do jogo
 pygame.mixer.music.load('joker-boy-109889.mp3')
 pygame.mixer.music.set_volume(0.4)
-good_sound = pygame.mixer.Sound('arcade-videogame-sound-160948.mp3')
-explosion_sound = pygame.mixer.Sound('hq-explosion-6288.mp3')
+good_sound = pygame.mixer.Sound('arcade-videogame-sound-160948.mp3')    # quando o pac man pega o hamburguer
+explosion_sound = pygame.mixer.Sound('hq-explosion-6288.mp3')     # quando o pac man encosta na bomba 
 
 all_sprites = pygame.sprite.Group()
+all_obstaculo = pygame.sprite.Group()
+all_comida = pygame.sprite.Group()
 
 player = jogador()
 all_sprites.add(player)
@@ -34,7 +36,10 @@ game = True
  
 pygame.mixer.music.play(loops=-1)  # começa a tocar o som de fundo em loop;
 
-while game :      # loop principal 
+
+score = 0
+
+while game:      # loop principal 
     clock.tick(FPS)   # Quanto mais frames, mais rápido o objeto vai se mexer 
     window.fill((0,0,0))       # preenche a tela com  a cor preta para não mostrar a trajetória do objeto
 
@@ -62,12 +67,27 @@ while game :      # loop principal
         objeto_obstaculo = obstaculo()
         objeto_comida = comida(objeto_obstaculo.rect.x)
         all_sprites.add(objeto_obstaculo, objeto_comida)
+        all_obstaculo.add(objeto_obstaculo)
+        all_comida.add(objeto_comida)
         ref = now
     
+    hits = pygame.sprite.spritecollide(player, all_obstaculo, True)
+    if len(hits) > 0:
+        # Toca o som de explosão 
+        explosion_sound.play()
+        player.kill()
+        game = False
+
+        # Desenhando o score
+    text_surface = pygame.font.Font(None,40).render(f'{score}', True, (0, 0, 0))
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (largura / 2,  10)
+
+
+    # Atualiza o jogo
     all_sprites.update()
     window.blit(background, background_rect)
     all_sprites.draw(window)
-
-
+    window.blit(text_surface, text_rect)
 
     pygame.display.update()  # a cada iteração do loop principal do jogo a tela é atualizada 
