@@ -8,7 +8,7 @@ pygame.mixer.init()
 
 def tela_init (window):
     clock = pygame.time.Clock()
-    bg = pygame.image.load('telainicial.jpg').convert()
+    bg = pygame.image.load('pacmantela.png').convert()
     bg = pygame.transform.scale(bg, (largura, altura))
     bg_rect = bg.get_rect()
     # espaço para imagens 

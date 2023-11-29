@@ -5,7 +5,7 @@ def over_tela(window):
     clock = pygame.time.Clock()
 
     # imagens para colocar 
-    img = pygame.image.load('gameover_imagem.jpg').convert()
+    img = pygame.transform.scale(pygame.image.load('pactriste.jpeg').convert(),(largura, altura))  # imagem game over
     img_rect = img.get_rect()
 
     running =  True 

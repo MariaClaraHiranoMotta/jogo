@@ -10,8 +10,7 @@ from over_tela import *
 
 def tela_jogo(window):
 
-    background = pygame.image.load('pacman-10.jpg').convert()   # tela de fundo 
-    #background = pygame.transform.scale('tela_pacman.jpg',(largura, altura))
+    background = pygame.transform.scale(pygame.image.load('pacman-10.jpg').convert(),(largura, altura))  # tela do jogo
     background_rect = background.get_rect()
     life = pygame.image.load('vida_coraçao.png').convert_alpha()
     life_rect = life.get_rect()
@@ -85,6 +84,7 @@ def tela_jogo(window):
         pontuar = pygame.sprite.spritecollide(player, all_comida, True)
         if len(pontuar) > 0:
             score += 100
+            good_sound.play()
 
         all_sprites.update()
         window.blit(background, background_rect)
@@ -100,7 +100,7 @@ def tela_jogo(window):
             # Desenhando as vidas 
         text_surface = pygame.font.Font('Assets/Fontes/PressStart2P-Regular.ttf',40).render(chr(9829) * vida, True, (255, 0, 0))
         text_rect = text_surface.get_rect()
-        text_rect.bottomleft = (10, altura - 10)
+        text_rect.bottomleft = (10, 50)
         window.blit(text_surface, text_rect)
 
         # Atualiza o jogo

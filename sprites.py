@@ -7,7 +7,7 @@ class jogador(pygame.sprite.Sprite):
          # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self) 
 
-        self.image = pygame.image.load('pacman.png').convert_alpha()  # carrega imagem 
+        self.image = pygame.image.load('pac.png').convert_alpha()  # carrega imagem 
         self.image = pygame.transform.scale(self.image, (50, 50))     # tamamnho da imagem 
         self.rect = self.image.get_rect()      # monta perímetro para imagem 
         self.rect.bottom = altura
