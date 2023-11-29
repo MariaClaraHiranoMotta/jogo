@@ -10,7 +10,7 @@ from over_tela import *
 
 def tela_jogo(window):
 
-    background = pygame.image.load('tela_pacman.jpg').convert()   # tela de fundo 
+    background = pygame.image.load('pacman-10.jpg').convert()   # tela de fundo 
     #background = pygame.transform.scale('tela_pacman.jpg',(largura, altura))
     background_rect = background.get_rect()
     life = pygame.image.load('vida_coraçao.png').convert_alpha()
