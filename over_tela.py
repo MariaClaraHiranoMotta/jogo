@@ -5,23 +5,24 @@ def over_tela(window):
     clock = pygame.time.Clock()
 
     # imagens para colocar 
+    img = pygame.image.load('gameover_imagem.jpg').convert()
+    img_rect = img.get_rect()
 
-
-    game = True 
+    running =  True 
 
     # ===== Loop principal =====
-    while game: 
+    while running: 
         clock.tick(FPS)     # frames por segundo 
 
-        for event in pygame.event.gt(): 
+        for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
                 state = QUIT 
-                game = False
+                running = False
             if event.type == pygame.KEYDOWN:
                 state = GAME 
-                game = False 
+                running = False 
 
-    window.blit()      # colocar imagem 
-    pygame.display.update()
+        window.blit(img, img_rect)      # colocar imagem 
+        pygame.display.update()
 
     return state
