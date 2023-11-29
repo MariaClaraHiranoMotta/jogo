@@ -2,7 +2,7 @@ import pygame
 
 pygame.init()
 
-largura = 640 
+largura = 640
 altura = 480
 FPS = 55
 x = largura/ 2   # meio da tela 
