@@ -1,34 +1,32 @@
 import pygame 
 from pygame.locals import * 
 from sys import exit 
-from janela import * 
+from config import * 
 
 pygame.init()
-pygame.mixer
+pygame.mixer.init()
 
-INIT = 0
-GAME = 1
-OVER = 2
-
-def tela_ini (window):
+def tela_init (window):
     clock = pygame.time.Clock()
-
+    bg = pygame.image.load('telainicial.jpg').convert()
+    bg = pygame.transform.scale(bg, (largura, altura))
+    bg_rect = bg.get_rect()
     # espaço para imagens 
     game = True
     
 # ===== Loop principal =====
     while game: 
-        clock.tip(FPS)      # Frames por segundo 
+        clock.tick(FPS)      # Frames por segundo 
 
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT : 
                 state = QUIT
                 game = False
-            elif event.type == pygame.KEYDOWN: 
+            if event.type == pygame.KEYDOWN: 
                 state = GAME
                 game = False 
-        
-        window.blit()  # colocar imagens 
+         # colocar imagens 
+        window.blit(bg, bg_rect)
         pygame.display.update()
 
     return state
