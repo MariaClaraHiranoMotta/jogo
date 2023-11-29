@@ -64,7 +64,7 @@ def tela_jogo(window):
     
         now = pygame.time.get_ticks()
 
-        if now - ref >= 1000:     # criar bombas e hamburguer novos a cada 1 segundo 
+        if now - ref >= 500:     # criar bombas e hamburguer novos a cada 1 segundo 
             objeto_obstaculo = obstaculo()
             objeto_comida = comida(objeto_obstaculo.rect.x)
             all_sprites.add(objeto_obstaculo, objeto_comida)
